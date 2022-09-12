@@ -28,4 +28,3 @@ puts "Offset:"
 off = gets.to_i
 
 puts caesar_cipher(str, off)
-p ALPHABET
