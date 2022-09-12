@@ -1,6 +1,6 @@
 # an array that represents the alphabet
 # created quickly and easily using the splat operator and range syntax
-ALPHABET = [*("a".."z")]
+ALPHABET = [*"a".."z"]
 
 def is_upcase?(character)
   return character == character.upcase
