@@ -1,11 +1,13 @@
 def bubble_sort(param)
   # prevent mutation of original array
   array = param.dup
+  bubble = 0
   loop do
     offset = 0
     no_swaps = true
     # loop over every two consecutive elements in the array
-    until offset == array.length - 1
+    # skip over the last elements - they'll have "bubbled up" anyway
+    until offset == array.length - 1 - bubble
       if array[offset] > array[offset + 1]
         # swap the elements if necessary
         no_swaps = false
@@ -13,6 +15,7 @@ def bubble_sort(param)
       end
       offset += 1
     end
+    bubble += 1
     # we're done here, all sorted (pun intended)
     break if no_swaps
   end
