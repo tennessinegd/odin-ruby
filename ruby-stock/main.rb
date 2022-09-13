@@ -4,33 +4,22 @@
   # if it's worth it, buy there instead; if not, use the previous buy value
 
 def stock_picker(prices)
-  prices.reduce({best: [], lowest: [0, 0], indices: [], index: -1}) do |acc, price|
-    # assign the hash array to a variable just for the sake of convenience
-    acc[:index] += 1
-    best = acc[:best]
-    indices = acc[:indices]
-    # skip first check
-    if best.empty?
-      best.push(price, price)
-      indices.push(acc[:index], acc[:index])
-      acc[:lowest][0] = price
-      next acc
+  lowest = prices[0]
+  lowest_index = 0
+  profit = 0
+  indices = [0, 0]
+  prices.each_with_index do |price, i|
+    if price < lowest
+      lowest = price
+      lowest_index = i
+      next
     end
-    # start new comparison
-    if price < acc[:lowest][0]
-      acc[:lowest][0] = price
-      acc[:lowest][1] = acc[:index]
-      next acc
+    if price - lowest > profit
+      profit = price - lowest
+      indices = [lowest_index, i]
     end
-    # check for profit and assign if it's better
-    if price - acc[:lowest][0] > best[1] - best[0]
-      best[0] = acc[:lowest][0]
-      best[1] = price
-      indices[0] = acc[:lowest][1]
-      indices[1] = acc[:index]
-    end
-    acc
-  end[:indices]
+  end
+  indices
 end
 
 
